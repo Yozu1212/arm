@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飲料點餐平台</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .slider-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .slider-container label {
+            width: 100px;
+        }
+        .slider-container input[type="range"] {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <!-- 加入 JsBarcode library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+    <h2>飲料點餐平台</h2>
+
+    <!-- 飲料選項 -->
+    <div class="section">
+        <div class="slider-container">
+            <label for="tea">紅茶</label>
+            <input type="range" id="tea" min="0" max="10" value="0">
+            <span id="tea-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="milk">牛奶</label>
+            <input type="range" id="milk" min="0" max="10" value="0">
+            <span id="milk-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="coffee">咖啡</label>
+            <input type="range" id="coffee" min="0" max="10" value="0">
+            <span id="coffee-value">0</span>
+        </div>
+    </div>
+
+    <!-- 配料選項 -->
+    <div class="section">
+        <div class="slider-container">
+            <label for="boba">波霸珍珠</label>
+            <input type="range" id="boba" min="0" max="10" value="0">
+            <span id="boba-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="small-pearl">小珍珠</label>
+            <input type="range" id="small-pearl" min="0" max="10" value="0">
+            <span id="small-pearl-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="coconut">椰果</label>
+            <input type="range" id="coconut" min="0" max="10" value="0">
+            <span id="coconut-value">0</span>
+        </div>
+    </div>
+
+    <!-- 甜度和冰塊 -->
+    <div class="section">
+        <div class="slider-container">
+            <label for="sugar">甜度</label>
+            <input type="range" id="sugar" min="0" max="10" value="0">
+            <span id="sugar-value">0</span>
+        </div>
+        <div class="slider-container">
+            <label for="ice">冰塊</label>
+            <input type="range" id="ice" min="0" max="10" value="0">
+            <span id="ice-value">0</span>
+        </div>
+    </div>
+
+    <!-- 送出訂單按鈕 -->
+    <button class="submit-button" onclick="submitOrder()">送出訂單</button>
+
+    <!-- 條碼顯示區 -->
+    <div id="barcode-container" style="text-align: center; margin-top: 20px;">
+        <svg id="barcode"></svg>
+    </div>
+
+    <script>
+        // 更新滑桿的數值顯示
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.addEventListener('input', function() {
+                const valueSpan = document.getElementById(`${this.id}-value`);
+                valueSpan.textContent = this.value;
+            });
+        });
+
+        // 送出訂單並生成條碼
+        function submitOrder() {
+            const order = {
+                tea: document.getElementById('tea').value,
+                milk: document.getElementById('milk').value,
+                coffee: document.getElementById('coffee').value,
+                boba: document.getElementById('boba').value,
+                smallPearl: document.getElementById('small-pearl').value,
+                coconut: document.getElementById('coconut').value,
+                sugar: document.getElementById('sugar').value,
+                ice: document.getElementById('ice').value
+            };
+
+            // 將訂單數值轉換為條碼字符串，將 "10" 替換為 "A"，並限制在 8 位數
+            const orderString = Object.values(order)
+                .map(value => value === "10" ? "A" : value) // 替換 10 為 A
+                .join('')                                  // 拼接成單一字符串
+                .slice(0, 8);                              // 限制字符串長度為 8
+
+            // 使用 JsBarcode 生成條碼
+            JsBarcode("#barcode", orderString, {
+                format: "CODE39",
+                lineColor: "#000",
+                width: 2,
+                height: 40,
+                displayValue: true
+            });
+
+            alert(`訂單已送出！\n${JSON.stringify(order, null, 2)}`);
+        }
+    </script>
+</body>
+</html>
