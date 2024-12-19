@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP 專屬頁面</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #444;
+        }
+        .vip-section {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+        .vip-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .vip-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>歡迎來到 VIP 專屬頁面</h2>
+    <div class="vip-section">
+        <p>此頁面專為 VIP 用戶設計，提供更多專屬優惠和內容。</p>
+        <p>您可以享有額外折扣、快速通道和獨家飲料選項。</p>
+    </div>
+    <button class="vip-button" onclick="goBack()">返回主頁</button>
+
+    <script>
+        function goBack() {
+            window.location.href = 'index.html'; // 返回主頁
+        }
+    </script>
+</body>
+</html>
+
