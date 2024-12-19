@@ -213,6 +213,20 @@
             alert(`訂單已送出！\n${JSON.stringify(order, null, 2)}`);
         }
     </script>
+    <div style="text-align: center; margin-top: 20px;">
+    <button class="submit-button" onclick="goToVIP()">VIP 專屬入口</button>
+</div>
+<script>
+    function goToVIP() {
+        const isVIP = confirm("是否為 VIP 用戶？");
+        if (isVIP) {
+            window.location.href = 'vip.html';
+        } else {
+            alert("此功能僅限 VIP 使用！");
+        }
+    }
+</script>
+
 </body>
 </html>
 
