@@ -6,48 +6,69 @@
     <title>飲料點餐平台</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             max-width: 400px;
             margin: 20px auto;
             padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         h2 {
             text-align: center;
+            color: #333;
+            margin-bottom: 20px;
         }
         .section {
             margin-bottom: 20px;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         .slider-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin: 10px 0;
         }
         .slider-container label {
             width: 100px;
+            font-size: 14px;
+            color: #555;
         }
         .slider-container input[type="range"] {
             flex: 1;
             margin: 0 10px;
         }
+        .slider-container span {
+            width: 30px;
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+        }
         .submit-button {
             display: block;
             width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #4CAF50;
+            padding: 12px;
+            background-color: #007BFF;
             color: white;
-            border: none;
-            border-radius: 5px;
             font-size: 16px;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        #barcode-container {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
-    <!-- 加入 JsBarcode library -->
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
@@ -109,7 +130,7 @@
     <button class="submit-button" onclick="submitOrder()">送出訂單</button>
 
     <!-- 條碼顯示區 -->
-    <div id="barcode-container" style="text-align: center; margin-top: 20px;">
+    <div id="barcode-container">
         <svg id="barcode"></svg>
     </div>
 
@@ -155,3 +176,4 @@
     </script>
 </body>
 </html>
+
